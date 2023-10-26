@@ -8,7 +8,7 @@ import { Icon } from "./Icon";
 import { Typography } from "./Typography";
 
 const menuItems = [
-  { name: "events", icon: "dashboard", href: "/event/" },
+  { name: "events", icon: "dashboard", href: "/" },
   { name: "create", icon: "plus", href: "/event/create" },
   { name: "results", icon: "bar-chart-2", href: "/event/result" },
 ] as { name: string; icon: IconName; href: string }[];

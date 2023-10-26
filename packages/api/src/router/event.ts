@@ -42,6 +42,7 @@ export const eventRouter = router({
   byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.prisma.event.findUniqueOrThrow({
       where: { id: input },
+      include: { options: true },
     });
   }),
   create: protectedProcedure

@@ -25,14 +25,10 @@ export const Event: FC<Props> = ({
   const { push } = useRouter();
   const { data } = trpc.vote.byEventId.useQuery(id);
 
-  const myCredits = useMemo(() => {
-    return 0;
-    // return data?.options.reduce((acc, curr) => {
-    //   return (
-    //     acc + curr.votes.reduce((_acc, _curr) => _acc + (_curr.credits ?? 0), 0)
-    //   );
-    // }, 0);
-  }, [data]);
+  const myCredits = useMemo(
+    () => data?.reduce((acc, curr) => acc + curr.credits, 0),
+    [data],
+  );
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>

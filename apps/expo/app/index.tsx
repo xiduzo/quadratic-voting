@@ -17,8 +17,6 @@ const EventPage = () => {
   const { data: latest } = trpc.event.latest.useQuery();
   const { data: trending } = trpc.event.trending.useQuery();
 
-  console.log({ latest: latest?.length, trending: trending?.length });
-
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleViewableItemsChanged = useCallback(
