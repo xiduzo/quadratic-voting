@@ -17,6 +17,7 @@ const EventDetailPage = () => {
   );
   const { mutateAsync, isLoading } = trpc.vote.create.useMutation({
     onSuccess: async () => {
+      await context.event.byId.invalidate();
       await context.vote.byEventId.invalidate();
     },
   });
@@ -46,7 +47,7 @@ const EventDetailPage = () => {
     if (!userVotes?.length) return;
 
     const credits = userVotes.reduce((acc, curr) => {
-      acc[curr.id] = curr.credits ?? 0;
+      acc[curr.optionId] = curr.credits ?? 0;
       return acc;
     }, {} as Record<string, number>);
 
