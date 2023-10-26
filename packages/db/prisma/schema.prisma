@@ -3,11 +3,54 @@
 
 generator client {
     provider = "prisma-client-js"
+    binaryTargets = ["native"]
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
+}
+
+model Event {
+    id        String   @id @default(cuid())
+    createdAt DateTime @map("created_at") @default(now())
+
+    title String
+    description String @db.VarChar(280)
+    credits Int @db.SmallInt
+    imageUri String @map("image_uri")
+
+    startDate DateTime @map("start_date")
+    endDate DateTime @map("end_date")
+
+    options Option[]
+
+    @@map("events")
+}
+
+model Option {
+    id       String   @id @default(cuid())
+
+    name     String
+    description String @db.VarChar(280)
+
+    event    Event    @relation(fields: [eventId], references: [id])
+    eventId  String   @map("event_id")
+
+    votes    Vote[]
+
+    @@map("options")
+}
+
+model Vote {
+    id       String   @id @default(cuid())
+
+    option   Option   @relation(fields: [optionId], references: [id])
+    optionId String   @map("option_id")
+
+    userId   String   @map("user_id") // clerk user id
+
+    @@map("votes")
 }
 
 model Post {

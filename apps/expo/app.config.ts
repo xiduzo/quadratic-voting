@@ -1,38 +1,49 @@
 import { ExpoConfig, ConfigContext } from "@expo/config";
 
-const CLERK_PUBLISHABLE_KEY = "your-clerk-publishable-key";
+const CLERK_PUBLISHABLE_KEY = "pk_live_Y2xlcmsuc2FuZGVyYm9lci5ubCQ";
+
+const version = "1.0.2"; // EAS VERSION
+// Should be bumped every time a new build is made
+const buildNumber = "26"; // EAS VERSION
 
 const defineConfig = (_ctx: ConfigContext): ExpoConfig => ({
-  name: "expo",
-  slug: "expo",
-  version: "1.0.0",
+  name: "votey",
+  slug: "votey",
+  scheme: "votey",
+  version,
   orientation: "portrait",
   icon: "./assets/icon.png",
-  userInterfaceStyle: "light",
+  userInterfaceStyle: "dark",
   splash: {
     image: "./assets/icon.png",
     resizeMode: "contain",
-    backgroundColor: "#2e026d",
+    backgroundColor: "#2F4858",
   },
   updates: {
     fallbackToCacheTimeout: 0,
   },
   assetBundlePatterns: ["**/*"],
   ios: {
+    buildNumber,
     supportsTablet: true,
-    bundleIdentifier: "your.bundle.identifier",
+    bundleIdentifier: "mdd.votey",
   },
   android: {
+    versionCode: Number(
+      version.replace(".", "").replace(".", "") + buildNumber,
+    ),
+    package: "mdd.votey",
     adaptiveIcon: {
       foregroundImage: "./assets/icon.png",
-      backgroundColor: "#2e026d",
+      backgroundColor: "#2F4858",
     },
   },
   extra: {
-    eas: {
-      projectId: "your-project-id",
-    },
     CLERK_PUBLISHABLE_KEY,
+    eas: {
+      projectId: "5c6aa601-a9f2-4e03-bcd0-b35bb4509af6",
+      // projectId: "2447171b-3c6c-4260-ad6a-655bcc2fdd0e", // Real Id
+    },
   },
   plugins: ["./expo-plugins/with-modify-gradle.js"],
 });
