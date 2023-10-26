@@ -26,7 +26,7 @@ export const Event: FC<Props> = ({
   const { data } = trpc.vote.byEventId.useQuery(id);
 
   const myCredits = useMemo(
-    () => data?.reduce((acc, curr) => acc + curr.credits, 0),
+    () => data?.reduce((acc, curr) => acc + curr.credits * curr.credits, 0),
     [data],
   );
 
