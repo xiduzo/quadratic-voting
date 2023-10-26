@@ -25,6 +25,8 @@ model Event {
 
     options Option[]
 
+    createdBy String @map("created_by") // clerk user id
+
     @@map("events")
 }
 
@@ -45,10 +47,12 @@ model Option {
 model Vote {
     id       String   @id @default(cuid())
 
+    credits  Int @db.SmallInt
+    userId   String   @map("user_id") // clerk user id
+
     option   Option   @relation(fields: [optionId], references: [id])
     optionId String   @map("option_id")
 
-    userId   String   @map("user_id") // clerk user id
 
     @@map("votes")
 }

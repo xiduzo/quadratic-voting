@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { TRPCProvider } from "./utils/trpc";
+import { TRPCProvider } from "../src/utils/trpc";
 
-import { SignInSignUpScreen } from "./screens/signin";
+import { SignInSignUpScreen } from "../src/screens/signin";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
-import { tokenCache } from "./utils/cache";
+import { tokenCache } from "../src/utils/cache";
 import Constants from "expo-constants";
 
 import {
@@ -18,9 +18,8 @@ import {
   Poppins_900Black,
   useFonts,
 } from "@expo-google-fonts/poppins";
-
+import { Header } from "../src/components/Header";
 import { Stack } from "expo-router";
-import { Header } from "./components/Header";
 
 export const App = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -42,7 +41,7 @@ export const App = () => {
     >
       <SignedIn>
         <TRPCProvider>
-          <SafeAreaProvider>
+          <SafeAreaProvider className="bg-primary">
             <Stack screenOptions={{ header: Header }} />
             {/* <HomeScreen /> */}
             <StatusBar />
@@ -55,3 +54,5 @@ export const App = () => {
     </ClerkProvider>
   );
 };
+
+export default App;
