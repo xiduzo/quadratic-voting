@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { Dimensions, View } from "react-native";
+import { View } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 import type { ViewToken } from "@shopify/flash-list";
@@ -67,7 +67,7 @@ const EventPage = () => {
             estimatedItemSize={250}
             extraData={{ activeIndex, latest }}
             decelerationRate="fast"
-            snapToInterval={Dimensions.get("window").width * 0.3}
+            // snapToInterval={Dimensions.get("window").width * 0.6}
             onViewableItemsChanged={handleViewableItemsChanged}
             snapToAlignment={snapToAlignment}
             horizontal

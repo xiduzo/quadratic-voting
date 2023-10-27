@@ -6,7 +6,6 @@ import type { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
 import { Icon } from "./Icon";
 import { V } from "./svgs/V";
-// import { IconButton } from "./button";
 import { Typography } from "./Typography";
 
 export const Header: FC<NativeStackHeaderProps> = (props) => {

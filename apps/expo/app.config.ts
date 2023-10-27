@@ -4,7 +4,7 @@ const CLERK_PUBLISHABLE_KEY = "pk_live_Y2xlcmsuc2FuZGVyYm9lci5ubCQ";
 
 const version = "1.0.2"; // EAS VERSION
 // Should be bumped every time a new build is made
-const buildNumber = "30"; // EAS VERSION
+const buildNumber = "31"; // EAS VERSION
 
 const defineConfig = (_ctx: ConfigContext): ExpoConfig => ({
   name: "votey",

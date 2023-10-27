@@ -1,12 +1,11 @@
 import { Stack } from "expo-router";
 import { View } from "react-native";
 import { trpc } from "../../../src/utils/trpc";
+import { EventResult } from "../../../src/components/EventResult";
 import { FlashList } from "@shopify/flash-list";
 
-const EventResult = () => {
+const Results = () => {
   const { data } = trpc.event.my.useQuery();
-
-  console.log({ data });
 
   return (
     <View className="bg-primary">
@@ -18,9 +17,14 @@ const EventResult = () => {
         }}
       />
 
-      <View className="mt-10 h-full w-full px-8">
+      <View className="h-full w-full">
         <FlashList
+          contentContainerStyle={{
+            paddingHorizontal: 32,
+            paddingVertical: 64,
+          }}
           data={data}
+          ItemSeparatorComponent={() => <View className="h-10" />}
           estimatedItemSize={300}
           renderItem={({ item }) => <EventResult key={item.id} {...item} />}
         />
@@ -29,4 +33,4 @@ const EventResult = () => {
   );
 };
 
-export default EventResult;
+export default Results;
