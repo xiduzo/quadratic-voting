@@ -12,7 +12,7 @@ export const EventResult: FC<Props> = ({ title }) => {
   );
 };
 
-type EventWithOptions = inferProcedureOutput<AppRouter["event"]["byId"]>;
+type EventWithOptions = inferProcedureOutput<AppRouter["event"]["my"]>[number];
 
 interface Props extends EventWithOptions {
   other?: boolean;
