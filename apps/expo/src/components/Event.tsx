@@ -9,6 +9,8 @@ import { trpc } from "../utils/trpc";
 import { Typography } from "./Typography";
 import { Button } from "./Button";
 import { formatDistanceToNow } from "date-fns";
+import { inferProcedureOutput } from "@trpc/server";
+import { AppRouter } from "@acme/api";
 
 export const Event: FC<Props> = ({
   endDate,
@@ -17,7 +19,7 @@ export const Event: FC<Props> = ({
   title,
   description,
   numberOfLines,
-  image,
+  imageUri,
   id,
   extraClass,
   size,
@@ -74,13 +76,11 @@ export const Event: FC<Props> = ({
   );
 };
 
-interface Props extends VariantProps<typeof event>, ViewProps {
-  endDate: Date;
+type Event = Omit<inferProcedureOutput<AppRouter["event"]["byId"]>, "options">;
+
+interface Props extends VariantProps<typeof event>, ViewProps, Event {
   id: string;
   maxTokens: number;
-  title: string;
-  description: string;
-  image?: string;
   extraClass?: string;
   numberOfLines?: number;
   onPress?: () => void;

@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { trpc } from "../../../src/utils/trpc";
-import { Navigation } from "../../../src/components/Navigation";
 import { Stepper } from "../../../src/components/Stepper";
 import { Button } from "../../../src/components/Button";
 import { Step1 } from "../../../src/components/create/step1";
@@ -109,19 +108,20 @@ const CreateEvent = () => {
   return (
     <View className="bg-primary">
       <Stack.Screen options={{ title: "Create", animation: "none" }} />
-      <Navigation activeItem="create" />
-      <View className="flex h-full w-full justify-between px-8 pb-28  pt-14">
+      <View className="flex h-full w-full justify-between px-8 pt-14 pb-10">
         <Stepper
           steps={["file upload", "information", "credits", "options", "dates"]}
           activeStep={stepIndex}
         />
-        <FormProvider {...formMethods}>
-          {stepIndex === 0 && <Step1 />}
-          {stepIndex === 1 && <Step2 />}
-          {stepIndex === 2 && <Step3 />}
-          {stepIndex === 3 && <Step4 />}
-          {stepIndex === 4 && <Step5 />}
-        </FormProvider>
+        <View className="grow">
+          <FormProvider {...formMethods}>
+            {stepIndex === 0 && <Step1 />}
+            {stepIndex === 1 && <Step2 />}
+            {stepIndex === 2 && <Step3 />}
+            {stepIndex === 3 && <Step4 />}
+            {stepIndex === 4 && <Step5 />}
+          </FormProvider>
+        </View>
         <View className="flex flex-row space-x-4">
           <Button
             className="grow"

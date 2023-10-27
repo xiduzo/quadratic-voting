@@ -20,6 +20,7 @@ import {
 } from "@expo-google-fonts/poppins";
 import { Header } from "../src/components/Header";
 import { Stack } from "expo-router";
+import { Navigation } from "../src/components/Navigation";
 
 export const App = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -45,6 +46,7 @@ export const App = () => {
             <Stack screenOptions={{ header: Header }} />
             {/* <HomeScreen /> */}
             <StatusBar />
+            <Navigation />
           </SafeAreaProvider>
         </TRPCProvider>
       </SignedIn>

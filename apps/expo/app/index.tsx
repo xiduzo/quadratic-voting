@@ -1,9 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Dimensions, View } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 import type { ViewToken } from "@shopify/flash-list";
-import { Navigation } from "../src/components/Navigation";
 import { Typography } from "../src/components/Typography";
 import { Event } from "../src/components/Event";
 import { trpc } from "../src/utils/trpc";
@@ -35,6 +34,19 @@ const EventPage = () => {
     [setActiveIndex],
   );
 
+  const snapToAlignment = useMemo(() => {
+    switch (activeIndex) {
+      case 0:
+        return "start";
+      case 1:
+        return "center";
+      case 2:
+        return "end";
+      default:
+        return "start";
+    }
+  }, [activeIndex]);
+
   return (
     <View className="bg-primary">
       <Stack.Screen
@@ -46,7 +58,6 @@ const EventPage = () => {
           ),
         }}
       />
-      <Navigation activeItem="events" />
       <View className="h-full w-full">
         <Typography intent="2xl" className="mb-4 mt-8 px-8">
           New
@@ -56,9 +67,9 @@ const EventPage = () => {
             estimatedItemSize={250}
             extraData={{ activeIndex, latest }}
             decelerationRate="fast"
-            snapToInterval={Dimensions.get("window").width * 0.4}
+            snapToInterval={Dimensions.get("window").width * 0.3}
             onViewableItemsChanged={handleViewableItemsChanged}
-            snapToAlignment="center"
+            snapToAlignment={snapToAlignment}
             horizontal
             contentContainerStyle={{
               paddingHorizontal: 8,
@@ -67,15 +78,12 @@ const EventPage = () => {
             renderItem={({ item, index }) => (
               <Event
                 onPress={() => push(`/event/${item.id}`)}
-                id={item.id}
                 key={item.id}
                 numberOfLines={4}
                 isActive={activeIndex === index}
-                extraClass="min-w-[60vw] max-w-[60vw] mx-4 h-[30vh]"
-                title={item.title}
-                description={item.description}
+                extraClass="min-w-[60vw] max-w-[60vw] mx-4 h-[30vh] mb-4"
                 maxTokens={item.credits ?? 100}
-                endDate={new Date(item.endDate ?? "")}
+                {...item}
               />
             )}
           />
@@ -97,15 +105,13 @@ const EventPage = () => {
         <View className="space-between flex w-full flex-row space-x-4 px-8">
           {trending?.map((item) => (
             <Event
-              id={item.id}
+              onPress={() => push(`/event/${item.id}`)}
               key={item.id}
               size="sm"
               numberOfLines={3}
               extraClass="grow w-[48%]"
-              title={item.title}
-              description={item.description}
               maxTokens={item.credits ?? 100}
-              endDate={new Date(item.endDate ?? "")}
+              {...item}
             />
           ))}
         </View>

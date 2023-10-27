@@ -152,15 +152,20 @@ const EventDetailPage = () => {
           )}
         />
         <View className="mb-12 mt-8 flex-row items-center justify-between space-x-8 px-8">
-          <View className="flex flex-row space-x-4">
+          <View className="flex flex-row items-center space-x-4">
             <EggButton
               icon="minus"
               onPress={decrementCreditsSpend}
               disabled={!canPressNextCredits("down")}
             />
-            <Typography intent="3xl" className="min-w-[12vw] text-center">
-              {creditsLeft}
-            </Typography>
+            <View className="min-w-[16vw]">
+              <Typography intent="4xl" className=" text-center font-black">
+                {creditsLeft}
+              </Typography>
+              <Typography intent="sm" className="text-center">
+                credits left
+              </Typography>
+            </View>
             <EggButton
               icon="plus"
               onPress={incrementCreditsSpend}

@@ -27,10 +27,10 @@ export const Step4 = () => {
 
   return (
     <View className="mt-8 grow">
-      <Typography intent="4xl" className="mb-9">
+      <Typography intent="4xl" className="mb-4">
         Options
       </Typography>
-      <ScrollView className="-mx-8 mb-6 max-h-[45vh] px-8">
+      <ScrollView className="-mx-8 mb-6 max-h-[52vh] px-8 pb-20">
         {fields.map((field, index) => (
           <View key={field.id} className="mb-6 space-y-2">
             <View className="flex-row items-center justify-between">
@@ -51,15 +51,15 @@ export const Step4 = () => {
             />
           </View>
         ))}
+        <View className="mb-40 flex flex-row justify-end">
+          <TouchableOpacity onPress={addOption}>
+            <View className="flex-row items-center space-x-2">
+              <Icon name="plus" className="opacity-40" />
+              <Typography dimmed>Add option</Typography>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
-      <View className="flex flex-row justify-end">
-        <TouchableOpacity onPress={addOption}>
-          <View className="flex-row items-center space-x-2">
-            <Icon name="plus" className="opacity-40" />
-            <Typography dimmed>Add option</Typography>
-          </View>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

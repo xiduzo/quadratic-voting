@@ -1,9 +1,12 @@
 import { Stack } from "expo-router";
 import { View } from "react-native";
 import { Typography } from "../../../src/components/Typography";
-import { Navigation } from "../../../src/components/Navigation";
+import { trpc } from "../../../src/utils/trpc";
+import { FlashList } from "@shopify/flash-list";
 
 const EventResult = () => {
+  const { data } = trpc.event.my.useQuery();
+
   return (
     <View className="bg-primary">
       <Stack.Screen
@@ -13,10 +16,13 @@ const EventResult = () => {
           headerBackVisible: true,
         }}
       />
-      <Navigation activeItem="results" />
 
-      <View className="h-full w-full pt-12">
-        <Typography>retuls</Typography>
+      <View className="mt-10 h-full w-full px-8">
+        <FlashList
+          data={data}
+          estimatedItemSize={300}
+          renderItem={({ item }) => <Typography>{item.title}</Typography>}
+        />
       </View>
     </View>
   );
