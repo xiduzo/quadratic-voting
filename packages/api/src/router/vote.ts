@@ -4,7 +4,7 @@ import { z } from "zod";
 const votes = z.array(
   z.object({
     optionId: z.string(),
-    credits: z.number(),
+    votes: z.number(),
   }),
 );
 

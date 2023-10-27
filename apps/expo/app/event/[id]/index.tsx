@@ -85,7 +85,7 @@ const EventDetailPage = () => {
     await mutateAsync(
       Object.keys(votes).map((optionId) => ({
         optionId,
-        credits: votes[optionId] ?? 0,
+        votes: votes[optionId] ?? 0,
       })),
     );
   }, [votes, mutateAsync]);
