@@ -32,7 +32,10 @@ export const voteRouter = router({
   }),
   byEventId: protectedProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.prisma.vote.findMany({
-      where: { option: { eventId: input } },
+      where: {
+        userId: ctx.auth.userId,
+        option: { eventId: input },
+      },
     });
   }),
 });
