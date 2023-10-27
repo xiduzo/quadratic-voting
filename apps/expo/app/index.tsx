@@ -7,6 +7,8 @@ import { Navigation } from "../src/components/Navigation";
 import { Typography } from "../src/components/Typography";
 import { Event } from "../src/components/Event";
 import { trpc } from "../src/utils/trpc";
+import { useAuth } from "@clerk/clerk-expo";
+import { Button } from "../src/components/Button";
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
@@ -16,6 +18,7 @@ export const unstable_settings = {
 const EventPage = () => {
   const { data: latest } = trpc.event.latest.useQuery();
   const { data: trending } = trpc.event.trending.useQuery();
+  const { signOut } = useAuth();
 
   const { push } = useRouter();
 
@@ -34,7 +37,15 @@ const EventPage = () => {
 
   return (
     <View className="bg-primary">
-      <Stack.Screen options={{ title: "Events", animation: "none" }} />
+      <Stack.Screen
+        options={{
+          title: "Events",
+          animation: "none",
+          headerRight: () => (
+            <Button size="sm" onPress={() => signOut()} title="Sign out" />
+          ),
+        }}
+      />
       <Navigation activeItem="events" />
       <View className="h-full w-full">
         <Typography intent="2xl" className="mb-4 mt-8 px-8">
@@ -58,6 +69,7 @@ const EventPage = () => {
                 onPress={() => push(`/event/${item.id}`)}
                 id={item.id}
                 key={item.id}
+                numberOfLines={4}
                 isActive={activeIndex === index}
                 extraClass="min-w-[60vw] max-w-[60vw] mx-4 h-[30vh]"
                 title={item.title}
@@ -82,33 +94,20 @@ const EventPage = () => {
         <Typography intent="2xl" className="mb-4 mt-0 px-8">
           Trending
         </Typography>
-        <View className="space-between flex w-full flex-row px-8">
-          {trending && (
-            <FlashList
-              estimatedItemSize={200}
-              decelerationRate="fast"
-              scrollEnabled={false}
-              onViewableItemsChanged={handleViewableItemsChanged}
-              snapToAlignment="center"
-              horizontal
-              contentContainerStyle={{
-                paddingHorizontal: 8,
-              }}
-              data={trending}
-              renderItem={({ item }) => (
-                <Event
-                  id={item.id}
-                  key={item.id}
-                  size="sm"
-                  extraClass="grow"
-                  title={item.title}
-                  description={item.description}
-                  maxTokens={item.credits ?? 100}
-                  endDate={new Date(item.endDate ?? "")}
-                />
-              )}
+        <View className="space-between flex w-full flex-row space-x-4 px-8">
+          {trending?.map((item) => (
+            <Event
+              id={item.id}
+              key={item.id}
+              size="sm"
+              numberOfLines={3}
+              extraClass="grow w-[48%]"
+              title={item.title}
+              description={item.description}
+              maxTokens={item.credits ?? 100}
+              endDate={new Date(item.endDate ?? "")}
             />
-          )}
+          ))}
         </View>
       </View>
     </View>

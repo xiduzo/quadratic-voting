@@ -25,6 +25,7 @@
     "@trpc/react-query": "^10.1.0",
     "@trpc/server": "^10.1.0",
     "class-variance-authority": "^0.7.0",
+    "date-fns": "^2.30.0",
     "expo": "^48.0.6",
     "expo-auth-session": "^4.0.3",
     "expo-constants": "~14.2.1",

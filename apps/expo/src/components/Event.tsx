@@ -8,6 +8,7 @@ import { cva } from "class-variance-authority";
 import { trpc } from "../utils/trpc";
 import { Typography } from "./Typography";
 import { Button } from "./Button";
+import { formatDistanceToNow } from "date-fns";
 
 export const Event: FC<Props> = ({
   endDate,
@@ -15,6 +16,7 @@ export const Event: FC<Props> = ({
   isActive,
   title,
   description,
+  numberOfLines,
   image,
   id,
   extraClass,
@@ -26,7 +28,7 @@ export const Event: FC<Props> = ({
   const { data } = trpc.vote.byEventId.useQuery(id);
 
   const myCredits = useMemo(
-    () => data?.reduce((acc, curr) => acc + curr.credits * curr.credits, 0),
+    () => data?.reduce((acc, curr) => acc + curr.votes * curr.votes, 0),
     [data],
   );
 
@@ -39,7 +41,7 @@ export const Event: FC<Props> = ({
         <View className="flex flex-row items-center justify-between gap-4">
           <View className="rounded-sm bg-white px-2">
             <Typography className="text-slate-900" intent="sm">
-              5 days
+              {formatDistanceToNow(endDate)}
             </Typography>
           </View>
           <View className="rounded-sm bg-white px-2">
@@ -48,9 +50,13 @@ export const Event: FC<Props> = ({
             </Typography>
           </View>
         </View>
-        <View className="mt-12 flex-grow justify-center">
+        <View className="mt-10 flex-grow justify-start">
           <Typography intent="2xl">{title}</Typography>
-          <Typography intent="sm" className="truncate">
+          <Typography
+            intent="sm"
+            className="truncate"
+            numberOfLines={numberOfLines}
+          >
             {description}
           </Typography>
         </View>
@@ -76,6 +82,7 @@ interface Props extends VariantProps<typeof event>, ViewProps {
   description: string;
   image?: string;
   extraClass?: string;
+  numberOfLines?: number;
   onPress?: () => void;
 }
 

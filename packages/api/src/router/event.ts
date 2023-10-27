@@ -25,13 +25,35 @@ export const eventRouter = router({
   latest: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.event.findMany({
       orderBy: { createdAt: "desc" },
-      take: 2,
+      where: { endDate: { gte: new Date() } },
+      take: 3,
     });
   }),
-  trending: publicProcedure.query(({ ctx }) => {
+  trending: publicProcedure.query(async ({ ctx }) => {
+    const latestVotes = await ctx.prisma.vote.findMany({
+      orderBy: { createdAt: "desc" },
+      where: { option: { event: { endDate: { gte: new Date() } } } },
+      include: { option: { include: { event: { select: { id: true } } } } },
+      take: 500,
+    });
+
+    // reduce votes to a map of event id to vote count
+    const eventVoteCountMap = latestVotes.reduce((acc, vote) => {
+      const eventId = vote.option.event.id;
+      const currentCount = acc.get(eventId) ?? 0;
+      acc.set(eventId, currentCount + 1);
+      return acc;
+    }, new Map<string, number>());
+
+    // get the top 2 events
+    const topEvents = Array.from(eventVoteCountMap.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 2);
+
+    // get the events from the db
     return ctx.prisma.event.findMany({
-      orderBy: { credits: "desc" },
-      take: 2,
+      where: { id: { in: topEvents.map(([id]) => id) } },
+      include: { options: true },
     });
   }),
   my: protectedProcedure.query(({ ctx }) => {

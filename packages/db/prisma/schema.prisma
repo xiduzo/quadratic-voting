@@ -46,8 +46,9 @@ model Option {
 
 model Vote {
     id       String   @id @default(cuid())
+    createdAt DateTime @map("created_at") @default(now())
 
-    credits  Int @db.SmallInt
+    votes  Int @db.SmallInt
     userId   String   @map("user_id") // clerk user id
 
     option   Option   @relation(fields: [optionId], references: [id])

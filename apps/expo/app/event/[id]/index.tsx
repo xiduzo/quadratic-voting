@@ -56,7 +56,7 @@ const EventDetailPage = () => {
     if (!userVotes?.length) return;
 
     const credits = userVotes.reduce((acc, curr) => {
-      acc[curr.optionId] = curr.credits ?? 0;
+      acc[curr.optionId] = curr.votes ?? 0;
       return acc;
     }, {} as Record<string, number>);
 
