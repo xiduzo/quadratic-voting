@@ -16,7 +16,7 @@ export const voteRouter = router({
           where: {
             userId: ctx.auth.userId,
             option: {
-              eventId: { in: input.map((vote) => vote.optionId) },
+              id: { in: input.map((vote) => vote.optionId) },
             },
           },
         });

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Dimensions, View } from "react-native";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 import type { ViewToken } from "@shopify/flash-list";
 import { Navigation } from "../src/components/Navigation";
@@ -16,6 +16,8 @@ export const unstable_settings = {
 const EventPage = () => {
   const { data: latest } = trpc.event.latest.useQuery();
   const { data: trending } = trpc.event.trending.useQuery();
+
+  const { push } = useRouter();
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -41,7 +43,7 @@ const EventPage = () => {
         {latest && (
           <FlashList
             estimatedItemSize={250}
-            extraData={activeIndex}
+            extraData={{ activeIndex, latest }}
             decelerationRate="fast"
             snapToInterval={Dimensions.get("window").width * 0.4}
             onViewableItemsChanged={handleViewableItemsChanged}
@@ -53,6 +55,7 @@ const EventPage = () => {
             data={latest}
             renderItem={({ item, index }) => (
               <Event
+                onPress={() => push(`/event/${item.id}`)}
                 id={item.id}
                 key={item.id}
                 isActive={activeIndex === index}
