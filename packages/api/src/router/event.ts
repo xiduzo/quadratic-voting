@@ -59,6 +59,7 @@ export const eventRouter = router({
   my: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.event.findMany({
       where: { createdBy: ctx.auth.userId },
+      include: { options: true },
     });
   }),
   byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
