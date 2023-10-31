@@ -6,8 +6,7 @@ import type { ViewToken } from "@shopify/flash-list";
 import { Typography } from "../src/components/Typography";
 import { Event } from "../src/components/Event";
 import { trpc } from "../src/utils/trpc";
-import { useAuth } from "@clerk/clerk-expo";
-import { Button } from "../src/components/Button";
+import { IconButton } from "../src/components/Button";
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
@@ -17,7 +16,6 @@ export const unstable_settings = {
 const EventPage = () => {
   const { data: latest } = trpc.event.latest.useQuery();
   const { data: trending } = trpc.event.trending.useQuery();
-  const { signOut } = useAuth();
 
   const { push } = useRouter();
 
@@ -54,7 +52,7 @@ const EventPage = () => {
           title: "Events",
           animation: "none",
           headerRight: () => (
-            <Button size="sm" onPress={() => signOut()} title="Sign out" />
+            <IconButton icon="user" onPress={() => push("/account")} />
           ),
         }}
       />

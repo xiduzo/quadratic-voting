@@ -44,7 +44,6 @@ export const App = () => {
         <TRPCProvider>
           <SafeAreaProvider className="bg-primary">
             <Stack screenOptions={{ header: Header }} />
-            {/* <HomeScreen /> */}
             <StatusBar />
             <Navigation />
           </SafeAreaProvider>

@@ -6,6 +6,7 @@ import SignInWithOAuth from "../components/SignInWithOAuth";
 import { Egg, Votey } from "../components";
 import { Typography } from "../components/Typography";
 import Svg, { Path } from "react-native-svg";
+import * as Device from "expo-device";
 
 export const SignInSignUpScreen = () => {
   const eggAnimation = useRef(new Animated.Value(650)).current;
@@ -61,7 +62,14 @@ export const SignInSignUpScreen = () => {
           Shape the future of your community equitably with our token based
           voting system.
         </Typography>
-        <SignInWithOAuth />
+        <View>
+          <SignInWithOAuth strategy="oauth_discord" />
+          {Device.brand === "Apple" && (
+            <View className="mt-4">
+              <SignInWithOAuth strategy="oauth_apple" />
+            </View>
+          )}
+        </View>
       </View>
     </SafeAreaView>
   );

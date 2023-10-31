@@ -14,7 +14,11 @@ export const EventResult: FC<EventWithOptions> = ({
   endDate,
 }) => {
   const totalVotes = useMemo(() => {
-    return options.reduce((acc, option) => acc + option.votes.length, 0);
+    return options.reduce(
+      (acc, option) =>
+        acc + option.votes.reduce((_acc, _curr) => _acc + _curr.votes, 0),
+      0,
+    );
   }, [options]);
 
   return (
@@ -38,7 +42,15 @@ export const EventResult: FC<EventWithOptions> = ({
               <View
                 className="absolute h-10 rounded-full bg-[#292727]"
                 style={{
-                  width: `${(option.votes.length / totalVotes) * 100}%`,
+                  width: `${
+                    (option.votes.reduce((acc, curr) => acc + curr.votes, 0) /
+                      totalVotes) *
+                    100
+                  }%`,
+                  minWidth:
+                    option.votes.reduce((acc, curr) => acc + curr.votes, 0) > 0
+                      ? 40
+                      : 0,
                 }}
               />
               <View className="flex-row items-center justify-between px-3">
@@ -46,8 +58,10 @@ export const EventResult: FC<EventWithOptions> = ({
                   {option.name}
                 </Typography>
                 <Typography intent="lg" className="text-sm">
-                  {option.votes.length} vote
-                  {option.votes.length === 1 ? "" : "s"}
+                  {option.votes.reduce((acc, curr) => acc + curr.votes, 0)} vote
+                  {option.votes.reduce((acc, curr) => acc + curr.votes, 0) === 1
+                    ? ""
+                    : "s"}
                 </Typography>
               </View>
             </View>

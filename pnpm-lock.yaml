@@ -89,6 +89,9 @@ importers:
       expo-dev-client:
         specifier: ~2.2.1
         version: 2.2.1(expo@48.0.10)
+      expo-device:
+        specifier: ^5.6.0
+        version: 5.6.0(expo@48.0.10)
       expo-image-picker:
         specifier: ^14.5.0
         version: 14.5.0(expo@48.0.10)
@@ -112,7 +115,7 @@ importers:
         version: 12.1.1(expo@48.0.10)
       nativewind:
         specifier: ^2.0.11
-        version: 2.0.11(react@18.2.0)(tailwindcss@3.2.4)
+        version: 2.0.11(react@18.2.0)(tailwindcss@3.2.2)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -169,8 +172,8 @@ importers:
         specifier: ^8.4.19
         version: 8.4.20
       tailwindcss:
-        specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.20)
+        specifier: 3.2.2
+        version: 3.2.2(postcss@8.4.20)
       typescript:
         specifier: ^4.9.3
         version: 4.9.4
@@ -239,8 +242,8 @@ importers:
         specifier: ^8.4.19
         version: 8.4.20
       tailwindcss:
-        specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.20)
+        specifier: 3.2.2
+        version: 3.2.2(postcss@8.4.20)
       typescript:
         specifier: ^4.9.3
         version: 4.9.4
@@ -279,8 +282,8 @@ importers:
         specifier: ^8.4.19
         version: 8.4.20
       tailwindcss:
-        specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.20)
+        specifier: 3.2.2
+        version: 3.2.2(postcss@8.4.20)
 
   packages/db:
     dependencies:
@@ -5123,7 +5126,7 @@ packages:
     dependencies:
       acorn-node: 1.8.2
       defined: 1.0.1
-      minimist: 1.2.7
+      minimist: 1.2.8
 
   /didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
@@ -5782,6 +5785,15 @@ packages:
       expo: 48.0.10(@babel/core@7.20.5)
       expo-dev-menu-interface: 1.1.1(expo@48.0.10)
       semver: 7.5.4
+    dev: false
+
+  /expo-device@5.6.0(expo@48.0.10):
+    resolution: {integrity: sha512-tWERUBJQ7LbBqQOr1dNyG+63iSYSYhhqhbIlA44sgRwlhUjLGPj6pfNUrniPFiggATDtIacaS5Nx5kTI69tuGg==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 48.0.10(@babel/core@7.20.5)
+      ua-parser-js: 0.7.37
     dev: false
 
   /expo-file-system@15.2.2(expo@48.0.10):
@@ -7179,7 +7191,7 @@ packages:
     resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==}
     hasBin: true
     dependencies:
-      minimist: 1.2.7
+      minimist: 1.2.8
     dev: true
 
   /json5@2.2.1:
@@ -7834,10 +7846,10 @@ packages:
 
   /minimist@1.2.7:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
+    dev: true
 
   /minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
-    dev: false
 
   /minipass-collect@1.0.2:
     resolution: {integrity: sha512-6T6lH0H8OG9kITm/Jm6tdooIbogG9e0tLgpY6mphXSm/A9u8Nq1ryBG+Qspiub9LjWlBPsPS3tWQ/Botq4FdxA==}
@@ -7931,7 +7943,7 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  /nativewind@2.0.11(react@18.2.0)(tailwindcss@3.2.4):
+  /nativewind@2.0.11(react@18.2.0)(tailwindcss@3.2.2):
     resolution: {integrity: sha512-qCEXUwKW21RYJ33KRAJl3zXq2bCq82WoI564fI21D/TiqhfmstZOqPN53RF8qK1NDK6PGl56b2xaTxgObEePEg==}
     engines: {node: '>=14.18'}
     peerDependencies:
@@ -7949,7 +7961,7 @@ packages:
       postcss-css-variables: 0.18.0(postcss@8.4.20)
       postcss-nested: 5.0.6(postcss@8.4.20)
       react-is: 18.2.0
-      tailwindcss: 3.2.4(postcss@8.4.20)
+      tailwindcss: 3.2.2(postcss@8.4.20)
       use-sync-external-store: 1.2.0(react@18.2.0)
     transitivePeerDependencies:
       - react
@@ -9970,8 +9982,8 @@ packages:
     resolution: {integrity: sha512-4kl5w+nCB44EVRdO0g/UGoOp3vlwgycUVtkk/7DPyeLZUCuNFFKCFG6/t/DgHLrUPHjrZg6s5tNm+56Q2B0xyg==}
     dev: false
 
-  /tailwindcss@3.2.4(postcss@8.4.20):
-    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
+  /tailwindcss@3.2.2(postcss@8.4.20):
+    resolution: {integrity: sha512-c2GtSdqg+harR4QeoTmex0Ngfg8IIHNeLQH5yr2B9uZbZR1Xt1rYbjWOWTcj3YLTZhrmZnPowoQDbSRFyZHQ5Q==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -10186,7 +10198,7 @@ packages:
     dependencies:
       '@types/json5': 0.0.29
       json5: 1.0.1
-      minimist: 1.2.7
+      minimist: 1.2.8
       strip-bom: 3.0.0
     dev: true
 
@@ -10330,6 +10342,10 @@ packages:
 
   /ua-parser-js@0.7.32:
     resolution: {integrity: sha512-f9BESNVhzlhEFf2CHMSj40NWOjYPl1YKYbrvIr/hFTDEmLq7SRbWvm7FcdcpCYT95zrOhC7gZSxjdnnTpBcwVw==}
+    dev: false
+
+  /ua-parser-js@0.7.37:
+    resolution: {integrity: sha512-xV8kqRKM+jhMvcHWUKthV9fNebIzrNy//2O9ZwWcfiBFR5f25XVZPLlEajk/sf3Ra15V92isyQqnIEXRDaZWEA==}
     dev: false
 
   /uglify-es@3.3.9:

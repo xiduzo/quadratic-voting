@@ -1,12 +1,14 @@
 import { useOAuth } from "@clerk/clerk-expo";
-import React from "react";
+import React, { FC } from "react";
 import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 import { Button } from "./Button";
 
-const SignInWithOAuth = () => {
+const SignInWithOAuth: FC<{ strategy: "oauth_discord" | "oauth_apple" }> = ({
+  strategy,
+}) => {
   useWarmUpBrowser();
 
-  const { startOAuthFlow } = useOAuth({ strategy: "oauth_discord" });
+  const { startOAuthFlow } = useOAuth({ strategy });
 
   const handleSignInWithDiscordPress = React.useCallback(async () => {
     try {
@@ -27,7 +29,7 @@ const SignInWithOAuth = () => {
 
   return (
     <Button
-      title="Sign in with Discord"
+      title={`Sign in with ${strategy.replace("oauth_", "")}`}
       onPress={handleSignInWithDiscordPress}
       endIcon="chevron-right"
     />

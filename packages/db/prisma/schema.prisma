@@ -36,7 +36,7 @@ model Option {
     name     String
     description String @db.VarChar(280)
 
-    event    Event    @relation(fields: [eventId], references: [id])
+    event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
     eventId  String   @map("event_id")
 
     votes    Vote[]
@@ -51,7 +51,7 @@ model Vote {
     votes  Int @db.SmallInt
     userId   String   @map("user_id") // clerk user id
 
-    option   Option   @relation(fields: [optionId], references: [id])
+    option   Option   @relation(fields: [optionId], references: [id], onDelete: Cascade)
     optionId String   @map("option_id")
 
 

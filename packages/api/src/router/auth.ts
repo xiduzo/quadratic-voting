@@ -1,10 +1,17 @@
-import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { protectedProcedure, router } from "../trpc";
+import { clerkClient } from "@clerk/nextjs/server";
 
 export const authRouter = router({
-  getSession: publicProcedure.query(({ ctx }) => {
-    return ctx.auth.session;
-  }),
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can see this secret message!";
+  requestAccountDeletion: protectedProcedure.mutation(async ({ ctx }) => {
+    try {
+      await ctx.prisma.event.deleteMany({
+        where: { createdBy: ctx.auth.userId },
+      });
+
+      return clerkClient.users.deleteUser(ctx.auth.userId);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   }),
 });

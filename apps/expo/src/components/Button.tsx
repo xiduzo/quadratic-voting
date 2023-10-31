@@ -82,6 +82,7 @@ const button = cva("rounded-lg border-2 flex flex-row items-center", {
       primary: "border-white",
       secondary: "border-primary",
       action: "bg-white border-white",
+      error: "bg-red-500 border-red-500",
     },
     hasIcon: {
       true: "justify-between",
