@@ -3,9 +3,9 @@ import React, { FC } from "react";
 import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 import { Button } from "./Button";
 
-const SignInWithOAuth: FC<{ strategy: "oauth_discord" | "oauth_apple" }> = ({
-  strategy,
-}) => {
+const SignInWithOAuth: FC<{
+  strategy: "oauth_discord" | "oauth_apple" | "oauth_google";
+}> = ({ strategy }) => {
   useWarmUpBrowser();
 
   const { startOAuthFlow } = useOAuth({ strategy });

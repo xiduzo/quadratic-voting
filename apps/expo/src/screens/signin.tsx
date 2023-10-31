@@ -69,6 +69,11 @@ export const SignInSignUpScreen = () => {
               <SignInWithOAuth strategy="oauth_apple" />
             </View>
           )}
+          {Device.brand === "google" && (
+            <View className="mt-4">
+              <SignInWithOAuth strategy="oauth_google" />
+            </View>
+          )}
         </View>
       </View>
     </SafeAreaView>
